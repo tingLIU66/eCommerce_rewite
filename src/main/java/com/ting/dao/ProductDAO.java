@@ -39,12 +39,12 @@ public class ProductDAO implements IProductDAO{
 	public void deleteProduct(int productId) {
 		entityManager.remove(getProductById(productId));
 	}
-/*	public boolean productExists(String title, String category) {
+	public boolean productExists(String title) {
 		String hql = "FROM Product as atcl WHERE atcl.title = ? and atcl.category = ?";
 		int count = entityManager.createQuery(hql).setParameter(1, title)
 		              .setParameter(2, category).getResultList().size();
 		return count > 0 ? true : false;
-	}*/
+	}
 
 
 
