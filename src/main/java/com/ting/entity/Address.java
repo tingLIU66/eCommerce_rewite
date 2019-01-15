@@ -1,9 +1,13 @@
 package com.ting.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 public class Address {
 	
@@ -12,11 +16,20 @@ public class Address {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="addressId") 
 	private int addressId;
+    @Column(name="addressline") 
 	private String addressline;
-	private String City;
-	private String State;
+    @Column(name="city") 
+	private String city;
+    @Column(name="state") 
+	private String state;
+    @Column(name="zipcode") 
 	private String zipcode;
-	
+	@ManyToOne                 //多个地址对一个用户
+	@JoinColumn(name="cutomerId")
+	private Customer customer;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="address")                  //一个地址多个订单
+	private Order order;
+    
 	public int getAddressId() {
 		return addressId;
 	}
@@ -30,16 +43,16 @@ public class Address {
 		this.addressline = addressline;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 	public String getZipcode() {
 		return zipcode;
@@ -47,6 +60,20 @@ public class Address {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	
 	
 	
 

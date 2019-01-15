@@ -2,10 +2,12 @@ package com.ting.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -14,17 +16,24 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="orderId")
 	private int orderId;
+	@Column(name="orderdate")
 	private String orderdate;
+	@Column(name="totalprice")
 	private float totalprice;
+	@Column(name="tax")
 	private float tax;
-	private float amount;	
+	@Column(name="amount")
+	private float amount;
+	@Column(name="orderstatus")
 	private String orderstatus;
-	@OneToOne
+	@ManyToOne  //多个订单可以下到一个地址
+	@JoinColumn(name="addressId")
 	private Address shippingaddress;
-	@OneToOne
+	@OneToOne(mappedBy="order",cascade = CascadeType.ALL, orphanRemoval = true )
 	private OrderDetail orderdetail;
 	@ManyToOne                 //可以是多个订单对应一个用户
-	private Customer costomer;
+	@JoinColumn(name="customerId")
+	private Customer customer;
 	
 	public int getOrderId() {
 		return orderId;
@@ -74,11 +83,12 @@ public class Order implements Serializable {
 	public void setOrderdetail(OrderDetail orderdetail) {
 		this.orderdetail = orderdetail;
 	}
-	public Customer getCostomer() {
-		return costomer;
+
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCostomer(Customer costomer) {
-		this.costomer = costomer;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 	

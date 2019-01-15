@@ -2,11 +2,14 @@ package com.ting.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 
 /**
  * This Class is to set and get customer information
@@ -30,8 +33,12 @@ public class Customer implements Serializable{
 		private String customerlastname;
 	    @Column(name="email")
 		private String customeremail;	
-	    @OneToMany         //一个用户可以保存多个地址
+	    @OneToMany(cascade=CascadeType.ALL, mappedBy="customer")         //一个用户可以保存多个地址
 	    private Address address;
+	    @OneToMany(cascade=CascadeType.ALL, mappedBy="customer")          //一个用户下多个订单
+	    private Order order;
+	    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	    private Cart cart;
 		
 		public int getCustomerId() {
 			return customerId;
@@ -75,6 +82,12 @@ public class Customer implements Serializable{
 		public void setAddress(Address address) {
 			this.address = address;
 		}
+		public Order getOrder() {
+			return order;
+		}
+		public void setOrder(Order order) {
+			this.order = order;
+		}
 	
-	
+	    
 }

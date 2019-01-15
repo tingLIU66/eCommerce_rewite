@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,9 @@ public class Product implements Serializable {
 	private double productPrice;
 	@Column(name="ProductQuantity")
 	private int productQuantity;
+	@ManyToOne
+	@JoinColumn(name="cartId")
+	private Cart cart;
 	
 	public int getProductId() {
 		return productId;
@@ -56,6 +61,13 @@ public class Product implements Serializable {
 	public void setProductQuantity(int productQuantity) {
 		this.productQuantity = productQuantity;
 	}
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+	
 }
 	
 	

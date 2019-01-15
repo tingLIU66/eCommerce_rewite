@@ -4,17 +4,25 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 public class OrderDetail {
 	
 	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="orderdetailId") 
-	private int orderdetailId;
+    @Column(name="orderdetailId")
+   	private int orderdetailId;
+    @Column(name="pId") 
 	private int pId;
+    @Column(name="pprice") 
 	private double pprice;
-	private int pquantity;	
+    @Column(name="pquantity") 
+	private int pquantity;
+    @OneToOne
+    @MapsId
+    private Order order;
 
 	public int getOrderdetailId() {
 		return orderdetailId;
@@ -39,6 +47,12 @@ public class OrderDetail {
 	}
 	public void setPquantity(int pquantity) {
 		this.pquantity = pquantity;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 	
