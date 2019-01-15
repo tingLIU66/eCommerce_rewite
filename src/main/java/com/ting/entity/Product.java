@@ -12,16 +12,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ProductId")
 	private int productId;
-	private String productname;
-	private String productdescription;
-	private double productprice;
-	//@Column(name="productowner_productownerID")	
-	//private int productownerID;
-	private int productquantity;	
+	@Column(name="ProductName")
+	private String productName;
+	@Column(name="ProductDescription")
+	private String productDescription;
+	@Column(name="ProductPrice")
+	private double productPrice;
+	@Column(name="ProductQuantity")
+	private int productQuantity;
 	
 	public int getProductId() {
 		return productId;
@@ -29,39 +32,30 @@ public class Product implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	public String getProductname() {
-		return productname;
+	public String getProductName() {
+		return productName;
 	}
-	public void setProductname(String productname) {
-		this.productname = productname;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
-	public String getProductdecription() {
-		return productdescription;
+	public String getProductDescription() {
+		return productDescription;
 	}
-	public void setProductdecription(String productdecription) {
-		this.productdescription = productdecription;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
-	public double getProductprice() {
-		return productprice;
+	public double getProductPrice() {
+		return productPrice;
 	}
-	public void setProductprice(double d) {
-		this.productprice = d;
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
 	}
-/*	public int getProductownerID() {
-		return productownerID;
+	public int getProductQuantity() {
+		return productQuantity;
 	}
-	public void setProductownerID(int productownerID) {
-		this.productownerID = productownerID;
-	}*/
-	public int getProductquantity() {
-		return productquantity;
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
-	public void setProductquantity(int productquantity) {
-		this.productquantity = productquantity;
-	}
-	
-	
-	
-	
-
 }
+	
+	

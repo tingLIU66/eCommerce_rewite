@@ -12,7 +12,7 @@ import com.ting.entity.Product;
 @Transactional
 @Repository
 public class ProductDAO implements IProductDAO{
-	@PersistenceContext	  //通过@PersistenceContext注释注入方式获得EntityManager对象
+	@PersistenceContext	  //get EntityManager object through @PersistenceContext injection
 	private EntityManager entityManager;	
 
 	public Product getProductById(int productId) {
@@ -20,7 +20,7 @@ public class ProductDAO implements IProductDAO{
 	}
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllProducts() {
-		String hql = "FROM Product as prdt ORDER BY prdt.ProductID";
+		String hql = "FROM Product as prdt ORDER BY prdt.productId"; //productId should be the same to the instance variable
 		return (List<Product>) entityManager.createQuery(hql).getResultList();
 	}	
 	public void addProduct(Product product) {
@@ -29,23 +29,18 @@ public class ProductDAO implements IProductDAO{
 	
 	public void updateProduct(Product product) {
 		Product prdt = getProductById(product.getProductId());
-		prdt.setProductname(product.getProductname());
-		prdt.setProductdecription(product.getProductdecription());
-		prdt.setProductprice(product.getProductprice());
-	//	prdt.setProductownerID(product.getProductownerID());
-		prdt.setProductquantity(product.getProductquantity());
+		prdt.setProductName(product.getProductName());
+		prdt.setProductDescription(product.getProductDescription());
+		prdt.setProductPrice(product.getProductPrice());
+		prdt.setProductQuantity(product.getProductQuantity());
 		entityManager.flush();
 	}
 	public void deleteProduct(int productId) {
 		entityManager.remove(getProductById(productId));
 	}
-	public boolean productExists(String title) {
-		String hql = "FROM Product as atcl WHERE atcl.title = ? and atcl.category = ?";
-		int count = entityManager.createQuery(hql).setParameter(1, title)
-		              .setParameter(2, category).getResultList().size();
+	public boolean productExists(String productname) {
+		String hql = "FROM Product as prdt WHERE prdt.productName = ?1";
+		int count = entityManager.createQuery(hql).setParameter(1, productname).getResultList().size();
 		return count > 0 ? true : false;
 	}
-
-
-
 }

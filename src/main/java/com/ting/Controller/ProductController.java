@@ -21,7 +21,7 @@ import com.ting.service.IProductService;
 
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("shoppingapi")
 public class ProductController {
 	@Autowired
 	private IProductService productService;

@@ -22,8 +22,12 @@ public class ProductService implements IProductService{
 	}
 
 	public boolean addProduct(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+	      if (productDAO.productExists(product.getProductName())) {
+	    	   return false;
+	       } else {
+	    	   productDAO.addProduct(product);
+	    	   return true;
+	       }
 	}
 
 	public void updateProduct(Product product) {
