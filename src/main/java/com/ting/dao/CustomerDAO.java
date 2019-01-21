@@ -5,9 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ting.entity.Customer;
 
-
+@Transactional
+@Repository
 public class CustomerDAO implements ICustomerDAO{
 	@PersistenceContext	  //get EntityManager object through @PersistenceContext injection
 	private EntityManager entityManager;	
@@ -41,9 +45,9 @@ public class CustomerDAO implements ICustomerDAO{
 		
 		
 	}
-	/*public boolean customerExists(String customername) {
-		String hql = "FROM Customer as cstm WHERE cstm.customerName = ?1";
-		int count = entityManager.createQuery(hql).setParameter(1, customername).getResultList().size();
+	public boolean customerExists(String email) {
+		String hql = "FROM Customer as cstm WHERE cstm.customeremail = ?1";
+		int count = entityManager.createQuery(hql).setParameter(1, email).getResultList().size();
 		return count > 0 ? true : false;
-	}*/
+	}
 }

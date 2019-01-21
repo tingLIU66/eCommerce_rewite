@@ -1,16 +1,13 @@
-package com.ting.dao;
+package com.ting.service;
 
 import java.util.List;
 
 import com.ting.entity.Customer;
 
-public interface ICustomerDAO {
-	
+public interface ICustomerService {
     List<Customer> getAllCustomers();
     Customer getCustomerById(int customerid);
-    void addCustomer(Customer customer);
+    boolean addCustomer(Customer customer);
     void updateCustomer(Customer customer);
     void deleteCustomer(int customerId);
-   	boolean customerExists(String email);
-
 }
