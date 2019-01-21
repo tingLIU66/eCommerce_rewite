@@ -1,6 +1,7 @@
 package com.ting.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,11 +35,13 @@ public class Customer implements Serializable{
 	    @Column(name="email")
 		private String customeremail;	
 	    @OneToMany(cascade=CascadeType.ALL, mappedBy="customer")         //一个用户可以保存多个地址
-	    private Address address;
+	    private Set<Address> addresses;
 	    @OneToMany(cascade=CascadeType.ALL, mappedBy="customer")          //一个用户下多个订单
-	    private Order order;
+	    private Set<Order> orders;
 	    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private Cart cart;
+	    @OneToMany(cascade=CascadeType.ALL, mappedBy="customer")
+	    private Set<Payment> payment;
 		
 		public int getCustomerId() {
 			return customerId;
@@ -76,18 +79,31 @@ public class Customer implements Serializable{
 		public void setCustomeremail(String customeremail) {
 			this.customeremail = customeremail;
 		}
-		public Address getAddress() {
-			return address;
+		public Set<Address> getAddresses() {
+			return addresses;
 		}
-		public void setAddress(Address address) {
-			this.address = address;
+		public void setAddresses(Set<Address> addresses) {
+			this.addresses = addresses;
 		}
-		public Order getOrder() {
-			return order;
+		public Set<Order> getOrders() {
+			return orders;
 		}
-		public void setOrder(Order order) {
-			this.order = order;
+		public void setOrders(Set<Order> orders) {
+			this.orders = orders;
 		}
+		public Cart getCart() {
+			return cart;
+		}
+		public void setCart(Cart cart) {
+			this.cart = cart;
+		}
+		public Set<Payment> getPayment() {
+			return payment;
+		}
+		public void setPayment(Set<Payment> payment) {
+			this.payment = payment;
+		}
+
 	
 	    
 }

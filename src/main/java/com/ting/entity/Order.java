@@ -34,6 +34,8 @@ public class Order implements Serializable {
 	@ManyToOne                 //可以是多个订单对应一个用户
 	@JoinColumn(name="customerId")
 	private Customer customer;
+	@OneToOne(mappedBy="order",cascade = CascadeType.ALL, orphanRemoval = true )
+	private Payment payment;
 	
 	public int getOrderId() {
 		return orderId;
@@ -89,6 +91,12 @@ public class Order implements Serializable {
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 	
 	

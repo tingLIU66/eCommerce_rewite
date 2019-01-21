@@ -1,5 +1,7 @@
 package com.ting.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -28,7 +30,7 @@ public class Address {
 	@JoinColumn(name="cutomerId")
 	private Customer customer;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="address")                  //一个地址多个订单
-	private Order order;
+	private Set<Order> orders;
     
 	public int getAddressId() {
 		return addressId;
@@ -66,12 +68,13 @@ public class Address {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Order getOrder() {
-		return order;
+	public Set<Order> getOrders() {
+		return orders;
 	}
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
+	
 
 	
 	

@@ -1,5 +1,7 @@
 package com.ting.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -22,7 +24,7 @@ public class Cart {
     @Column(name="cartquantity") 
 	private int cartquantity;
     @OneToMany(cascade=CascadeType.ALL, mappedBy="cart") 
-   	private Product product;
+   	private Set<Product> products;
     @OneToOne
     @MapsId
 	private Customer customer;
@@ -45,11 +47,12 @@ public class Cart {
 	public void setCartquantity(int cartquantity) {
 		this.cartquantity = cartquantity;
 	}
-	public Product getProduct() {
-		return product;
+	
+	public Set<Product> getProducts() {
+		return products;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 	public Customer getCustomer() {
 		return customer;
